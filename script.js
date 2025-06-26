@@ -167,6 +167,29 @@ document.addEventListener('DOMContentLoaded', () => {
   scrollAnimatedEls.forEach(el => {
     scrollObserver.observe(el);
   });
+
+  // --- PROJECTS SECTION ANIMATION ---
+  const projectCards = document.querySelectorAll('.project-card');
+  if (projectCards.length > 0) {
+    projectCards.forEach(card => {
+      card.classList.add('pre-animate');
+    });
+    const projectObserver = new window.IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-on-scroll');
+          } else {
+            entry.target.classList.remove('animate-on-scroll');
+          }
+        });
+      },
+      { threshold: 0.18 }
+    );
+    projectCards.forEach(card => {
+      projectObserver.observe(card);
+    });
+  }
 });
 
 // --- ADVANCED CUSTOM CURSOR ANIMATION ---
